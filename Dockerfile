@@ -8,10 +8,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     sudo \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Allow passwordless sudo for any user in the sudo group
-RUN echo "%sudo ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-
-ARG USERNAME=gloo
-RUN groupadd -f sudo && usermod -aG sudo $USERNAME 2>/dev/null || true
+RUN mkdir -p /etc/sudoers.d \
+ && echo "%users ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/99-users-nopasswd \
+ && chmod 0440 /etc/sudoers.d/99-users-nopasswd
 
 CMD ["/bin/bash"]
