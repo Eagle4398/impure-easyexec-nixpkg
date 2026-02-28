@@ -5,6 +5,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libgtk2.0-0 \
     libnss3 \
+    libatk-bridge2.0-0 \
+    libasound2 \
+    libatspi2.0-0 \
     sudo \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
